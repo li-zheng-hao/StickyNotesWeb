@@ -3,3 +3,18 @@ html,body{
     padding: 0px;
     height: 100%;
 }
+
+/**滚动条的宽度*/
+::-webkit-scrollbar {
+    width: 10px;/*竖向*/
+    height: 5px;/*横向*/
+}
+
+/*滚动条的滑块*/
+::-webkit-scrollbar-thumb {
+    background-color: #1ABC9C;
+    border-radius: 4px;
+}bar-thumb {
+    background-color: #1ABC9C;
+    border-radius: 4px;
+}

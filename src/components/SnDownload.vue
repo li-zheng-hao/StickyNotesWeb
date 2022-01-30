@@ -1,58 +1,59 @@
 <template>
-  <div class="SnMain">
-    <div class="image-box1">
-      <el-image :src="src" fit="fill"></el-image>
-    </div>
-    <div class="image-box2">
-      <el-image :src="src" fit="fill"></el-image>
-    </div>
-    <div class="image-box3">
-      <el-image :src="src" fit="fill"></el-image>
+  <div class="sn-download">
+    <div class="block">
+      <el-timeline>
+        <el-timeline-item v-for="item in versionData" :timestamp="item.update_time" placement="top">
+          <el-card>
+            <h4>版本: {{item.version}}</h4>
+            <h5>更新内容:</h5>
+            <p v-for="history in item.history_text">
+              {{history.history_text}}
+            </p>
+            <p class="p-author" >{{item.author}} 提交于 {{item.update_time}}</p>
+            <a :href="file_path"><el-button type="primary" @click="clickDownload">点击下载</el-button></a>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SnMain",
+  name: "SnDownload",
   data() {
     return {
+      versionData:[],
       a: 1,
-      src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
+      src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+      file_path:'http://ftp.lizhenghao.site/1.zip'
     }
   },
+  methods:{
+    clickDownload(){
+
+    }
+  },
+  async mounted() {
+    let data=await  this.getRequest('/api/Software/QuerySoftwareData')
+    console.log(data.data);
+    this.versionData=data.data;
+  }
 }
 </script>
 
 <style lang="less" scoped>
-.SnMain{
-  height: 100%;
-  width: 100%;
-  /deep/ .el-image{
-    height: 100%;
-    padding: 0;
-    width: 100%;
-  }
-  .image-box1 {
-    height: 100%;
-    width: 100%;
-    background-color: #3a8ee6;
-    margin: 0;
-  }
 
-  .image-box2 {
-    height: 100%;
-    background-color: #00ff00;
-    margin: 0;
-  }
+.sn-download{
+  margin-top: 20px;
+  margin-right: 100px;
+  font-family: Verdana !important;
 
-  .image-box3 {
-    height: 100%;
-    background-color: #8c939d;
-    margin: 0;
-
-  }
 }
-
+.p-author{
+  color: #636e72;
+  margin-right: auto;
+  font-style: oblique;
+}
 
 </style>
