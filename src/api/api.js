@@ -1,84 +1,53 @@
-import axios from 'axios';
+import axios from "axios";
+import { Message } from "element-ui";
 
-//  让请求在浏览器中允许跨域携带cookie
-axios.defaults.withCredentials = true;
-
-// 使用自定义配置新建一个 axios 实例
-const service= axios.create({
-    // 基础的请求地址
-    baseURL: 'https://some-domain.com/api/',
-    // 设置超时时间 5s
-    timeout: 5000
-});
-
-// 添加超时后的处理（axios中需要你根据error信息来进行判断）
-axios().catch(error => {
-    const { message } = error;
-    if (error.code === 'ECONNABORTED' && message.indexOf('timeout')> -1){
-        // 超时处理，可以直接弹出错误或者重新发起一次请求
-        alert("请求超时！请检查网络问题")
-        //  let newHttp= new Promise(function (resolve){
-        //      resolve()
-        //  })
-        //  newHttp实例执行完成后会再次执行
-        //  返回一个promise实例，同时重新发起请求，config请求配置，包扩请求头和请求参数
-        //  return newHttp.then(function (){
-        //      return  axios.create({baseURL: 'https://some-domain.com/api/',timeout: 5000});
-        //  })
-
-    }
-    // 若不是超时,则返回未错误信息
-    return Promise.reject(error);
-})
-
-// 请求拦截器，例如请求的时候在头部加上请求的token
-service.interceptors.request.use(config => {
-
-    //  if (localStorage.getItem('token')) {
-
-    //     config.headers.ACCESS_TOKEN = localStorage.getItem('token');
-
-    //  }
-
-    return config;  //  有且必须有一个config对象被返回
-
-}, error => {
-    //   对请求错误做些什么
-    console.log(error);
-    return Promise.reject();
-});
-
-
-// 响应拦截器,例如判断服务器返回的状态，400，500啥的，其实超时可以写到这里面来，我分开写了一个比较直观
-service.interceptors.response.use(
-    response => {
-        if (response.status === 200) {
-            return Promise.resolve(response.data);
-        } else {
-            return Promise.reject(response);
+// 请求拦截器
+axios.interceptors.request.use(
+    (config) => {
+        let token = sessionStorage.getItem("Authorization");
+        // 如果存在token，请求携带token
+        if (token) {
+            config.headers["Authorization"] = token;
         }
+        return config;
     },
-    // 服务器状态码不是200的情况,这些自定义（需要与后台商量返回）
-    error => {
-        if (
-            400 <= error.response.status <500
-        ) {
-            alert("用户信息过期，请重新登陆");
-            // 清除token
-            // localStorage.removeItem("token");
-            // 跳转登录
-            setTimeout(() => {
-                //   window.location.href = "/login";
-            }, 1000);
-        } else {
-            if (error.response.status >= 500) {
-                alert("服务器开小差了，请稍后再试！");
-            } else {
-                alert("服务器开小差了，请稍后再试！");
-                return Promise.reject(error)
-            }
-        }
+    (error) => {
+        console.log(error);
     }
 );
 
-export default service;
+// 响应拦截器
+axios.interceptors.response.use(
+    (success) => {
+        //业务逻辑错误
+        console.log("接收到后端返回的response");
+        if (success.status && success.status == 200) {
+            if (success.data.sussess == false && sussess.data.message != "") {
+                Message.error({ message: success.data.message });
+                return;
+            }
+        }
+        return success.data;
+    },
+    (error) => {
+        Message.error({ message: "操作失败" + error.response.data.message });
+        return null;
+    }
+);
+
+// 传送json格式的post请求
+export const postRequest = (url, params) => {
+    return axios({
+        method: "post",
+        url: process.env.VUE_APP_SERVER_URL + url,
+        data: params,
+    });
+};
+
+export const getRequest = (url, params) => {
+    return axios({
+        method: "get",
+        url: `${process.env.VUE_APP_SERVER_URL}${url}`,
+        data: params,
+    });
+};

@@ -5,7 +5,7 @@
         <SnMenu/>
       </el-header>
       <el-main>
-        <SnMain/>
+        <router-view></router-view>
       </el-main>
     </el-container>
 
@@ -24,14 +24,21 @@ export default {
   },
   data() {
     return {
-      a: 1,
-      src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
     }
   },
   methods: {
     handleSelect(select) {
       this.$message(select);
     }
+  },
+  beforeDestroy() {
+    this.$EventBus.$off('changePage');
+  },
+  mounted() {
+    this.$router.push('/home');
+    this.$EventBus.$on('changePage', (url)=>{
+       this.$router.push((url));
+    });
   }
 
 
@@ -41,6 +48,12 @@ export default {
 
 .home{
   height: 100%;
+  .el-header{
+    padding: 0px !important;
+  }
+}
+.el-header{
+  z-index: 2;
 }
 .el-container,.el-main{
     height: 100%;

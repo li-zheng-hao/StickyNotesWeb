@@ -1,19 +1,24 @@
 # stickynotesweb
 
-## Project setup
+
+
+## 介绍
+
+本项目为StickyNotes软件的官网源码，使用Vue开发
+
+主页地址：[https://stickynotes.lizhenghao.site](https://stickynotes.lizhenghao.site) (开发中，暂未上线)
+
+## 项目安装环境
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 测试运行
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 打包
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

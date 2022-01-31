@@ -1,41 +1,71 @@
 <template>
   <el-menu :default-active="index" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-    <el-menu-item index="1">处理中心</el-menu-item>
-    <el-submenu index="2">
-      <template slot="title">我的工作台</template>
-      <el-menu-item index="2-1">选项1</el-menu-item>
-      <el-menu-item index="2-2">选项2</el-menu-item>
-      <el-menu-item index="2-3">选项3</el-menu-item>
-      <el-submenu index="2-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="2-4-1">选项1</el-menu-item>
-        <el-menu-item index="2-4-2">选项2</el-menu-item>
-        <el-menu-item index="2-4-3">选项3</el-menu-item>
-      </el-submenu>
-    </el-submenu>
-    <el-menu-item index="3" disabled>消息中心</el-menu-item>
-    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+    <el-menu-item  class="sn-title">  <span class="sn-title" style="font-size: 24px;font-family: Verdana">StickyNotes</span>
+    </el-menu-item>
+    <el-menu-item index="1" >主页</el-menu-item>
+
+    <el-menu-item index="2">下载地址</el-menu-item>
+    <el-menu-item index="3">关于</el-menu-item>
+    <el-menu-item class="item4" index="4">
+      <el-tooltip  effect="dark" content="Github" placement="top">
+        <a href="http://www.lizhenghao.site" target="_blank">
+          <i
+              class="fa fa-github fa-2x" aria-hidden="true">
+          </i></a>
+      </el-tooltip>
+    </el-menu-item>
+
   </el-menu>
 </template>
 
 <script>
 export default {
   name: "Menu",
-  data(){
+  data() {
     return {
-      index:1
+      index: '1'
     }
   },
-  methods:{
-    handleSelect(select){
-      this.$message(select);
+  methods: {
+    handleSelect(select) {
+      if(select=='1')
+      {
+        this.$EventBus.$emit('changePage', '/home');
+      }else if(select=='2')
+      {
+        this.$EventBus.$emit('changePage', '/download');
+      }
+      else if(select=='3')
+      {
+        this.$EventBus.$emit('changePage', '/about');
+      }else{
+        this.$EventBus.$emit('changePage', '/home');
+      }
     }
   }
 
 }
 </script>
 
-<style scoped>
-.el-menu{
+<style scoped lang="less">
+/deep/ .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus, .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover
+{
+  background-color: transparent;
 }
+.el-menu {
+  background-color: rgba(250, 250, 250, 0.8);
+  display: flex;
+  .sn-title{
+    margin-right: 60%;
+  }
+  .el-menu-item{
+    margin-left: 30px;
+
+  }
+  .item4 {
+    margin-left: auto;
+  }
+}
+
+
 </style>
