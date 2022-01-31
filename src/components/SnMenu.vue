@@ -48,8 +48,12 @@ export default {
 </script>
 
 <style scoped lang="less">
-
+/deep/ .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus, .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover
+{
+  background-color: transparent;
+}
 .el-menu {
+  background-color: rgba(250, 250, 250, 0.8);
   display: flex;
   .sn-title{
     margin-right: 60%;

@@ -10,7 +10,8 @@
               {{history.history_text}}
             </p>
             <p class="p-author" >{{item.author}} 提交于 {{item.update_time}}</p>
-            <a :href="file_path"><el-button type="primary" @click="clickDownload">点击下载</el-button></a>
+            <a :href="file_base+item.software_name+'_'+item.version+'.zip'"> <el-button type="primary" @click="clickDownload">点击下载</el-button>
+            </a>
           </el-card>
         </el-timeline-item>
       </el-timeline>
@@ -26,12 +27,11 @@ export default {
       versionData:[],
       a: 1,
       src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-      file_path:'http://ftp.lizhenghao.site/1.zip'
+      file_base:process.env.VUE_APP_BASE_FILE_URL
     }
   },
   methods:{
     clickDownload(){
-
     }
   },
   async mounted() {

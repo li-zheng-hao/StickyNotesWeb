@@ -52,6 +52,9 @@ export default {
     padding: 0px !important;
   }
 }
+.el-header{
+  z-index: 2;
+}
 .el-container,.el-main{
     height: 100%;
     padding: 0px;
