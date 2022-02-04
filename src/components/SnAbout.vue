@@ -2,6 +2,10 @@
   <div class="SnAbout">
     <el-card>
     <h1>关于项目技术栈</h1>
+      <p>架构图:</p>
+
+      <p class="architecture-img"><img height="700px" src="https://blog-1257680986.cos.ap-nanjing.myqcloud.com/stickynotesweb_architecture.svg"></p>
+
     <p>前端:</p>
     <p>1.Web:Vue2</p>
     <p>2.StickyNotes:WPF+MVVMLight(MVVM库)+MaterialDesign(UI库)+Mahapp(UI库)</p>
@@ -11,9 +15,12 @@
       <p>3.数据库 Mysql</p>
       <p>4.模型映射 AutoMapper</p>
       <p>5.IOC SqlSugar.IOC</p>
-    <h1>关于BUG、任意建议或技术交流</h1>
+
+
+      <h1>关于BUG、任意建议或技术交流</h1>
     <p>1.优先通过github提issue</p>
     <p>2.通过我的邮箱 or QQ</p>
+
     <h1>关于作者的联系方式</h1>
     <p> QQ:1263212577 </p>
     <p> 邮箱:1263212577@qq.com/lizhenghao152@gmail.com</p>
@@ -58,7 +65,9 @@ export default {
    h1{
      align-self: center;
      color: #9c88ff;
-
+   }
+   .architecture-img{
+     align-self: center;
    }
  }
 }
