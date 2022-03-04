@@ -8,7 +8,7 @@
     <el-menu-item index="3">关于</el-menu-item>
     <el-menu-item class="item4" index="4">
       <el-tooltip  effect="dark" content="Github" placement="top">
-        <a href="http://www.lizhenghao.site" target="_blank">
+        <a href="https://github.com/li-zheng-hao/StickyNotes" target="_blank">
           <i
               class="fa fa-github fa-2x" aria-hidden="true">
           </i></a>
