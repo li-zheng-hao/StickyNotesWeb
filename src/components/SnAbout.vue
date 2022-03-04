@@ -11,13 +11,13 @@
     <p>2.StickyNotes:WPF+MVVMLight(MVVM库)+MaterialDesign(UI库)+Mahapp(UI库)</p>
     <p>后端:</p>
       <p>1..Net Core Webapi</p>
-      <p>2.ORM SqlSugarCore</p>
-      <p>3.数据库 Mysql</p>
-      <p>4.模型映射 AutoMapper</p>
-      <p>5.IOC SqlSugar.IOC</p>
-
-
-      <h1>关于BUG、任意建议或技术交流</h1>
+      <p>2.ORM: SqlSugarCore</p>
+      <p>3.数据库: Mysql</p>
+      <p>4.模型映射: AutoMapper</p>
+      <p>5.IOC: Autofac</p>
+      <p>6.缓存数据库: Redis</p>
+      <p>7.日志: log4net</p>
+    <h1>关于BUG、任意建议或技术交流</h1>
     <p>1.优先通过github提issue</p>
     <p>2.通过我的邮箱 or QQ</p>
 
